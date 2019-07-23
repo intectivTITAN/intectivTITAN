@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IntecTIV TITAN</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- Google Font Roboto -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+<body>
+
+
+
+<!----------------------------------------LOGIN OVERLAY---------------------------------------------->
+<!--------------------------------------------------------------------------------------------------->
+<div alt="LoginPart" id="LoginOverlay">
+<div class="container text-center" alt="grid">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="loginAllignCenter" alt="Login modal like" id="leftside">
+
+
+        <form class="loginModalLike" id="LoginEmail-form">
+          <center>
+            <input class="loginInput" type="email" name="Lemail" id="login-email" width="100px" placeholder="E-mail"> <br>
+            <input class="loginInput" type="password" name="Lpass" id="login-password" width="100px" placeholder="Password"> <br>
+            <button class="loginButtonLeft" id="LoginActualClick">Login</button>
+            <p id="LoginEmailErrorText" style="color: darkred;"></p>
+          </center>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="loginAllignCenter" alt="Welcome">
+        <p class="loginWelcome">IntecTIV ATG-Log</p>
+        <center>
+          <button class="loginButtonLeft" id="LoginClick">Login</button> <button class="loginButtonRight" id="RegisterClick">Register</button>
+        </center>
+      </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+      <div class="loginAllignCenter" alt="Login modal like" id="rightside">
+
+
+        <form class="loginModalLike" id="register-form">
+          <center>
+            <input class="loginInput" type="email" name="Lemail" width="100px" id="signup-email" placeholder="E-mail"> <br>
+            <input class="loginInput" type="password" name="Lpass" width="100px" id="signup-password" placeholder="Password"> <br>
+            <input class="loginInput" type="text" name="code" width="100px" id="signup-code"  placeholder="verification code"> <br>
+            <button class="loginButtonRight" id="RegisterActualClick">Register</button>
+            <p id="RegisterErrorText" style="color: darkred;"></p>
+          </center>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCZuedYJur1aGBLr9lp-bt9DRsPfJiSxn4",
+    authDomain: "intectiv-titan.firebaseapp.com",
+    databaseURL: "https://intectiv-titan.firebaseio.com",
+    projectId: "intectiv-titan",
+    storageBucket: "",
+    messagingSenderId: "316077196522",
+    appId: "1:316077196522:web:241a1090b654bb8d"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const Oa = firebase.auth();
+
+</script>
+
+<script src="Login.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
