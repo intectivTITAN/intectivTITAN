@@ -1,3 +1,5 @@
+const pageContent = document.querySelector("#content");
+
 // logout
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
@@ -16,6 +18,16 @@ firebase.auth().onAuthStateChanged(user => {
     console.log('user logged out');
     window.location.href = "../Login/Login.html";
   }
+});
+
+//-------Storage bucket------------
+
+//download machines
+db.collection('m_test').get().then((snapshot) => {
+  console.log(snapshot.docs);
+  snapshot.docs.forEach(doc => {
+    CreateMachineHTML(doc);
+  });
 });
 //------------END FIREBASE ------------------
 $(document).ready(function () {
@@ -47,6 +59,55 @@ $(document).ready(function () {
   });
 
 });
+
+function CreateMachineHTML(doc){
+  let img = document.createElement('img');
+  let container = document.createElement('div');
+  let center = document.createElement('center');
+  let colorSpace = document.createElement('div');
+  let text = document.createElement('div');
+
+  //name at the top
+  let H_name = document.createElement('p');
+  H_name.style.textAlign = "center";
+  H_name.textContent = doc.data().name;
+
+  //img and color
+  if(doc.data().status.toString() == "running"){
+    colorSpace.className = "m_inner m_inner-green";
+  }
+  else if(doc.data().status.toString() == "idle"){
+    colorSpace.className = "m_inner m_inner-yellow";
+  }
+  else if(doc.data().status.toString() == "error"){
+    colorSpace.className = "m_inner m_inner-red";
+  }
+
+  img.src = doc.data().img;
+  img.className = "m_img";
+
+  colorSpace.appendChild(img);
+
+  //PDN and status text
+  text.className = "m_text";
+  let pdnText = document.createElement('span');
+  let breakPoint = document.createElement('br');
+  pdnText.textContent = "PDN: " + doc.data().pdn;
+  text.appendChild(pdnText);
+  text.appendChild(breakPoint);
+
+  //the whole container
+  container.className = "m_container";
+  container.appendChild(H_name);
+
+  center.appendChild(colorSpace);
+
+  container.appendChild(center);
+  container.appendChild(text);
+
+  pageContent.appendChild(container);
+
+}
 
 //------------------Show Email part-------------------
 const emailPlace = document.getElementById("emailPlace");
