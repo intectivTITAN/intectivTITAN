@@ -24,9 +24,25 @@
 
 }
 
+.m_img{
+  width: 90%;
+  height: 90%;
+}
+
 .m_inner{
-  width: 150px;
   height: 125px;
+}
+
+.m_inner-red{
+  background-color: #ff0042;
+}
+
+.m_inner-green{
+  background-color: #12ff06;
+}
+
+.m_inner-yellow{
+  background-color: #fff900;
 }
 
 .m_text{
