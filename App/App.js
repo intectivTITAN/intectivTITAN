@@ -1,3 +1,7 @@
+//-----------First off show the status---------
+ShowStatus();
+//----------------------------------------------
+
 const pageContent = document.querySelector("#content");
 
 //event listners
