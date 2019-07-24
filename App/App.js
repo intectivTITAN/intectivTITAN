@@ -1,5 +1,6 @@
 const pageContent = document.querySelector("#content");
 
+//event listners
 // logout
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
@@ -7,6 +8,44 @@ logout.addEventListener('click', (e) => {
   e.preventDefault();
   firebase.auth().signOut();
 });
+
+//History
+const HistoryButton = document.querySelector('#histroyButton');
+HistoryButton.addEventListener('click', (e)=>{
+  e.preventDefault();
+  ClearPage();
+  //ShowHistory();
+  HistoryButton.className = "active";
+  CurrentButtton.className ="";
+});
+
+const CurrentButtton = document.querySelector("#statusButton");
+CurrentButtton.addEventListener('click',(e)=>{
+  e.preventDefault();
+  ClearPage();
+  ShowStatus();
+  HistoryButton.className = "";
+  CurrentButtton.className ="active";
+});
+
+
+//Clear page
+function ClearPage(){
+  var allElements = document.getElementById("content");
+  while(allElements.hasChildNodes()){
+    allElements.removeChild(allElements.firstChild);
+  }
+}
+
+function ShowStatus(){
+  //download machines
+  db.collection('m_test').get().then((snapshot) => {
+    console.log(snapshot.docs);
+    snapshot.docs.forEach(doc => {
+      CreateMachineHTML(doc);
+    });
+  });
+}
 
 // listen for auth status changes
 firebase.auth().onAuthStateChanged(user => {
@@ -22,13 +61,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 //-------Storage bucket------------
 
-//download machines
-db.collection('m_test').get().then((snapshot) => {
-  console.log(snapshot.docs);
-  snapshot.docs.forEach(doc => {
-    CreateMachineHTML(doc);
-  });
-});
+
 //------------END FIREBASE ------------------
 $(document).ready(function () {
 
