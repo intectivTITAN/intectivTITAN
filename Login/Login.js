@@ -53,7 +53,8 @@ signupForm.addEventListener('submit', (e) => {
     // sign up the user
     firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       return db.collection('users').doc(cred.user.uid).set({
-        isAdmin: false
+        isAdmin: false,
+        email: email
       }).then(()=>{
         // close the signup modal & reset form
         signupForm.reset();
