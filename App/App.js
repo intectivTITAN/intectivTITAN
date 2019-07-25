@@ -4,7 +4,34 @@ ShowStatus();
 
 const pageContent = document.querySelector("#content");
 
+//Scale buttons
+const sb_1 = document.querySelector('#SB_1');//.25
+const sb_2 = document.querySelector('#SB_2');//.5
+const sb_3 = document.querySelector('#SB_3');//.75
+const sb_4 = document.querySelector('#SB_4');//1
+
 //event listners
+sb_1.addEventListener('click', (e)=>{
+  e.preventDefault();
+  ChangeUIScale(1);
+});
+
+sb_2.addEventListener('click', (e)=>{
+  e.preventDefault();
+  ChangeUIScale(2);
+});
+
+sb_3.addEventListener('click', (e)=>{
+  e.preventDefault();
+  ChangeUIScale(3);
+});
+
+sb_4.addEventListener('click', (e)=>{
+  e.preventDefault();
+  ChangeUIScale(4);
+});
+
+
 // logout
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
@@ -145,6 +172,43 @@ function CreateMachineHTML(doc){
   pageContent.appendChild(container);
 
 }
+
+function ChangeUIScale(size){
+  var allElements = document.getElementById("content").children;
+
+  switch (size) {
+    case 1:
+      Array.prototype.forEach.call(allElements, item =>{
+        item.className = "m_container scale1";
+    });
+      break;
+
+    case 2:
+      Array.prototype.forEach.call(allElements, item =>{
+        item.className = "m_container scale2";
+      });
+      break;
+
+    case 3:
+      Array.prototype.forEach.call(allElements, item =>{
+        item.className = "m_container scale3";
+      });
+      break;
+
+    case 4:
+      Array.prototype.forEach.call(allElements, item =>{
+        item.className = "m_container scale4";
+      });
+      break;
+
+    default:
+      Array.prototype.forEach.call(allElements, item =>{
+        item.className = "m_container scale4";
+      });
+      break;
+  }
+}
+
 
 //------------------Show Email part-------------------
 const emailPlace = document.getElementById("emailPlace");

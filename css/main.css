@@ -10,6 +10,42 @@
 /* ==========================================================================
    Custom user stuff and things
    ========================================================================== */
+
+/*UI SCALE CSS =>*/
+.scale1{
+  transform: scale(.25);
+}
+
+.scale2{
+  transform: scale(.5);
+}
+.scale3{
+  transform: scale(.75);
+}
+.scale4{
+  transform: scale(1);
+}
+
+/*<=UI SCALE CSS*/
+
+
+
+.appButtonLeft{
+  font-family: Roboto, sans-serif;
+  border: none;
+  font-size: 100%;
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: #ececec;
+  float: right;
+  background: linear-gradient(70deg, #3976f9 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #717171 60%, #156ce8 60%);
+}
+
 .m_container{
   box-shadow: 6px 6px 17px -6px rgba(54,43,54,1);
   background-color: #717171;
@@ -19,7 +55,7 @@
   width: 200px;
   height: 230px;
   float: left;
-  margin-left: 300px;
+  margin-left: 30px;
   margin-bottom: 30px;
 
 }
