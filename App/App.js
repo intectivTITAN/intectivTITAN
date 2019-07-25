@@ -5,20 +5,14 @@ ShowStatus();
 const pageContent = document.querySelector("#content");
 
 //Scale buttons
-const sb_1 = document.querySelector('#SB_1');//.25
-const sb_2 = document.querySelector('#SB_2');//.5
+const sb_5 = document.querySelector('#SB_5');//1.25
 const sb_3 = document.querySelector('#SB_3');//.75
 const sb_4 = document.querySelector('#SB_4');//1
 
 //event listners
-sb_1.addEventListener('click', (e)=>{
+sb_5.addEventListener('click', (e)=>{
   e.preventDefault();
-  ChangeUIScale(1);
-});
-
-sb_2.addEventListener('click', (e)=>{
-  e.preventDefault();
-  ChangeUIScale(2);
+  ChangeUIScale(5);
 });
 
 sb_3.addEventListener('click', (e)=>{
@@ -177,19 +171,6 @@ function ChangeUIScale(size){
   var allElements = document.getElementById("content");
 
   switch (size) {
-    case 1:
-     /* Array.prototype.forEach.call(allElements, item =>{
-        item.className = "m_container scale1";
-    });*/
-     allElements.className= "scale1";
-      break;
-
-    case 2:
-      /*Array.prototype.forEach.call(allElements, item =>{
-        item.className = "m_container scale2";
-      });*/
-      allElements.className= "scale2";
-      break;
 
     case 3:
       /*Array.prototype.forEach.call(allElements, item =>{
@@ -203,6 +184,9 @@ function ChangeUIScale(size){
         item.className = "m_container scale4";
       });*/
       allElements.className= "";
+      break;
+    case 5:
+      allElements.className="scale5";
       break;
 
     default:
