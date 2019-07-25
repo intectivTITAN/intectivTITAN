@@ -34,7 +34,7 @@
   font-family: Roboto, sans-serif;
   border: none;
   font-size: 100%;
-  margin-top: 10px;
+  margin-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 2px;
@@ -43,7 +43,7 @@
   display: inline-block;
   color: #ececec;
   float: right;
-  background: linear-gradient(70deg, #3976f9 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #717171 60%, #156ce8 60%);
+  background: linear-gradient(70deg, #1a85cc 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #717171 60%, #1a85cc 60%);
 }
 
 .m_container{
@@ -105,7 +105,7 @@
   display: inline-block;
   color: #ececec;
 
-  background: linear-gradient(70deg, #3976f9 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #717171 60%, #156ce8 60%);
+  background: linear-gradient(70deg, #1a85cc 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #717171 60%, #1a85cc 60%);
 }
 
 .loginButtonRight{
@@ -121,7 +121,7 @@
   display: inline-block;
   color: #ececec;
 
-  background: linear-gradient(160deg, #3976f9 60%, rgba(0,0,0,0) 60%), linear-gradient(120deg, #717171 90%, #156ce8 90%);
+  background: linear-gradient(160deg, #1a85cc 60%, rgba(0,0,0,0) 60%), linear-gradient(120deg, #717171 90%, #1a85cc 90%);
 }
 
 .loginModalLike{

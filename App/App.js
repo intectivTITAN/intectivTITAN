@@ -161,7 +161,7 @@ function CreateMachineHTML(doc){
   text.appendChild(breakPoint);
 
   //the whole container
-  container.className = "m_container";
+  container.className = "m_container scale4";
   container.appendChild(H_name);
 
   center.appendChild(colorSpace);
@@ -174,37 +174,42 @@ function CreateMachineHTML(doc){
 }
 
 function ChangeUIScale(size){
-  var allElements = document.getElementById("content").children;
+  var allElements = document.getElementById("content");
 
   switch (size) {
     case 1:
-      Array.prototype.forEach.call(allElements, item =>{
+     /* Array.prototype.forEach.call(allElements, item =>{
         item.className = "m_container scale1";
-    });
+    });*/
+     allElements.className= "scale1";
       break;
 
     case 2:
-      Array.prototype.forEach.call(allElements, item =>{
+      /*Array.prototype.forEach.call(allElements, item =>{
         item.className = "m_container scale2";
-      });
+      });*/
+      allElements.className= "scale2";
       break;
 
     case 3:
-      Array.prototype.forEach.call(allElements, item =>{
+      /*Array.prototype.forEach.call(allElements, item =>{
         item.className = "m_container scale3";
-      });
+      });*/
+      allElements.className= "scale3";
       break;
 
     case 4:
-      Array.prototype.forEach.call(allElements, item =>{
+      /*Array.prototype.forEach.call(allElements, item =>{
         item.className = "m_container scale4";
-      });
+      });*/
+      allElements.className= "";
       break;
 
     default:
-      Array.prototype.forEach.call(allElements, item =>{
+      /*Array.prototype.forEach.call(allElements, item =>{
         item.className = "m_container scale4";
-      });
+      });*/
+      allElements.className= "";
       break;
   }
 }
