@@ -30,7 +30,7 @@
 
 .s_container{
     box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
-    background-color: rgba(222, 222, 222, 0.87);
+    background-color: rgba(214, 214, 214, 0.87);
     font-family: Roboto, sans-serif;
     color: white;
     border-radius: 5px;
@@ -58,7 +58,7 @@
 
 .s_name{
     font-family: Roboto, sans-serif;
-    color: #343434;
+
 }
 
 .appButtonLeft{

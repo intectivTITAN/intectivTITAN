@@ -2,7 +2,7 @@
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
-    //window.location.href = "../App/App.html";
+    window.location.href = "../App/App.html";
   } else {
     console.log('user logged out');
   }
@@ -64,6 +64,7 @@ signupForm.addEventListener('submit', (e) => {
       });
     }).catch(function(error) {
       // Handle Errors here.
+
       var errorCode = error.code;
       var errorMessage = error.message;
       // The email of the user's account used.
