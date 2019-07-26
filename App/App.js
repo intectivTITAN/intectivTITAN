@@ -220,3 +220,12 @@ function CheckifAdmin(user){
   }
 }
 
+
+//the updating stuff
+var timer = setInterval(Refresh, 60000);
+
+function Refresh(){
+  ClearPage();
+  ShowStatus();
+}
+
