@@ -4,12 +4,19 @@ ShowStatus();
 
 const pageContent = document.querySelector("#content");
 
+const adminButton = document.querySelector('#adminButton');
+
 //Scale buttons
 const sb_5 = document.querySelector('#SB_5');//1.25
 const sb_3 = document.querySelector('#SB_3');//.75
 const sb_4 = document.querySelector('#SB_4');//1
 
 //event listners
+adminButton.addEventListener(('click'), (e)=>{
+  e.preventDefault();
+  window.location.href = "../Settings/Settings.html";
+});
+
 sb_5.addEventListener('click', (e)=>{
   e.preventDefault();
   ChangeUIScale(5);
@@ -77,7 +84,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
     ShowEmail(user);
-
+    CheckifAdmin(user);
   } else {
     console.log('user logged out');
     window.location.href = "../Login/Login.html";
@@ -204,3 +211,12 @@ const emailPlace = document.getElementById("emailPlace");
 const ShowEmail = (user) =>{
   emailPlace.innerText = user.email;
 };
+
+//Check if user is admin
+function CheckifAdmin(user){
+  if(user.isAdmin != true){
+    button = document.getElementById("adminButton");
+    //button.parentNode.removeChild(button);
+  }
+}
+

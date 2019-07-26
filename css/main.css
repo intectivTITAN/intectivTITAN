@@ -28,7 +28,24 @@
 
 /*<=UI SCALE CSS*/
 
+.s_container{
+    box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
+    background-color: rgba(222, 222, 222, 0.87);
+    font-family: Roboto, sans-serif;
+    color: white;
+    border-radius: 5px;
+    width: 200px;
+    height: 60%;
+    float: left;
+    position: fixed;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
 
+.s_name{
+    font-family: Roboto, sans-serif;
+    color: #343434;
+}
 
 .appButtonLeft{
   font-family: Roboto, sans-serif;
