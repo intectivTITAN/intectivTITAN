@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>IntecTIV TITAN</title>
+
+    <meta name="description" content="Settings">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="apple-touch-icon" href="../icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Google Font Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <meta name="theme-color" content="#fafafa">
 </head>
 <body>
 
+
+
+
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCZuedYJur1aGBLr9lp-bt9DRsPfJiSxn4",
+        authDomain: "intectiv-titan.firebaseapp.com",
+        databaseURL: "https://intectiv-titan.firebaseio.com",
+        projectId: "intectiv-titan",
+        storageBucket: "",
+        messagingSenderId: "316077196522",
+        appId: "1:316077196522:web:241a1090b654bb8d"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const Oa = firebase.auth();
+
+</script>
+
+<script src="App.js"></script>
 </body>
 </html>
