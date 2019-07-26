@@ -2,7 +2,7 @@
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
-    window.location.href = "../App/App.html";
+    //window.location.href = "../App/App.html";
   } else {
     console.log('user logged out');
   }
@@ -51,7 +51,7 @@ signupForm.addEventListener('submit', (e) => {
 
   if(currentCode == code){
     // sign up the user
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
+    /*firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       return db.collection('users').doc(cred.user.uid).set({
         isAdmin: false,
         email: email
@@ -59,7 +59,9 @@ signupForm.addEventListener('submit', (e) => {
         Console.Log("We tryed to write to the database " + email);
         // close the signup modal & reset form
         signupForm.reset();
-      })
+      }).catch(function(error){
+        console.error("Error writing data:", + error)
+      });
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -73,6 +75,21 @@ signupForm.addEventListener('submit', (e) => {
     });
   }
   else{
+    document.getElementById("RegisterErrorText").innerText = "Invalid code";*/
+    // sign up the user & add firestore data
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
+      return db.collection('users').doc(cred.user.uid).set({
+        isAdmin: false,
+        email: email
+      });
+    }).then(() => {
+      signupForm.reset();
+      document.getElementById("RegisterErrorText").innerText = errorMessage;
+    }).catch(err => {
+      document.getElementById("RegisterErrorText").innerText = err.message;
+    });
+  }
+  else {
     document.getElementById("RegisterErrorText").innerText = "Invalid code";
   }
 
