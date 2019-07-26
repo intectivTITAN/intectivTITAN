@@ -28,6 +28,37 @@
 
 /*<=UI SCALE CSS*/
 
+
+.s_M_container_white{
+  box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
+  font-family: Roboto, sans-serif;
+  position: absolute;
+  border-radius: 5px;
+  top: 40%;
+  left:14%;
+  background: linear-gradient(70deg, #ececec 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgba(40, 40, 40, 0.86) 60%, #dedede 60%);
+}
+
+.s_M_container_black{
+  box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
+  font-family: Roboto, sans-serif;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  left: 39%;
+  background: linear-gradient(70deg, rgba(34, 34, 34, 0.94) 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgb(189, 189, 189) 60%, #3a3a3a 60%);
+}
+
+.s_M_container_red{
+  box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
+  font-family: Roboto, sans-serif;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  left: 65%;
+  background: linear-gradient(70deg, #ff0031 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgba(3, 3, 3, 0.86) 60%, #ff0031 60%);
+}
+
 .s_container{
     box-shadow: 6px 6px 17px -6px rgb(145, 134, 146);
     background-color: rgba(214, 214, 214, 0.87);
@@ -59,6 +90,34 @@
 .s_name{
     font-family: Roboto, sans-serif;
 
+}
+
+.s_redButton{
+  font-family: Roboto, sans-serif;
+  color: white;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: linear-gradient(70deg, #ff0031 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgba(3, 3, 3, 0.86) 60%, #ff0031 60%);
+}
+
+.s_whiteButton{
+  font-family: Roboto, sans-serif;
+  color: white;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: linear-gradient(70deg, #ececec 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgba(40, 40, 40, 0.86) 60%, #dedede 60%);
+}
+
+.s_blackButton{
+  font-family: Roboto, sans-serif;
+  color: white;
+  border: none;
+  margin: 10px 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: linear-gradient(70deg, #030911 30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, rgba(226, 226, 226, 0.86) 60%, #040a13 60%);
 }
 
 .appButtonLeft{
@@ -118,6 +177,8 @@
  margin-left: 20px;
  margin-bottom: 20px;
 }
+
+
 
 .loginWelcome{
   color: rgba(21,108,232,0.79);

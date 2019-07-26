@@ -29,25 +29,84 @@
     <div class="container text-center" alt="grid">
         <div class="row">
             <div class="col-lg-4">
-                <div class="s_container" id="WhiteList">
+                <div class="s_container">
                     <p class="s_name" style="text-decoration: underline white; color: #111111; background-color: rgba(249,238,245,0.93);">WhiteList</p>
+                    <div id="WhiteList">
+
+                    </div>
+                </div>
+                <!-- Modal White -->
+                <div id="whiteModal" class="modal">
+                    <div class="s_M_container_white">
+                        <span class="close">&times;</span>
+                        <center>
+                            <p style="color:white">Name</p>
+                            <input type="text" id="nameOfmachineWhite"> <br><br>
+                            <p style="color:white">Value</p>
+                            <input type="number" id="errorCodeWhite"> <br><br>
+                            <button class="s_whiteButton" id="SubmitWhite" style="margin-bottom: 20px"> Submit </button>
+                        </center>
+
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="s_container" id="BlackList">
+                <div class="s_container">
                     <p class="s_name" style="text-decoration: underline black; color: #ededed; background-color: rgba(38,38,38,0.9);" >BlackList</p>
+                    <div id="BlackList">
+
+                    </div>
                 </div>
+                <!-- Modal White -->
+                <div id="blackModal" class="modal">
+                    <div class="s_M_container_black">
+                        <span class="close">&times;</span>
+                        <center>
+                            <p style="color:white">Name</p>
+                            <input type="text" id="nameOfmachineBlack"> <br><br>
+                            <p style="color:white">Value</p>
+                            <input type="number" id="errorCodeBlack"> <br><br>
+                            <button class="s_blackButton" id="SubmitBlack" style="margin-bottom: 20px"> Submit </button>
+                        </center>
+
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-4">
-                <div class="s_container" id="RedList">
+                <div class="s_container">
                     <p class="s_name" style="text-decoration: underline red;color: #ededed; background-color: rgba(255,0,49,0.9);">RedList</p>
+                    <div id="RedList">
+
+                    </div>
+                </div>
+                <!-- Modal White -->
+                <div id="redModal" class="modal">
+                    <div class="s_M_container_red">
+                        <span class="close">&times;</span>
+                        <form id="redUpload">
+                        <center>
+
+                            <p style="color:white">Name</p>
+                            <input type="text" id="nameOfmachineRed"> <br><br>
+                            <p style="color:white">Value</p>
+                            <input type="number" id="errorCodeRed"> <br><br>
+                            <button class="s_redButton" id="SubmitRed" style="margin-bottom: 20px"> Submit </button>
+                        </center>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div alt="buttons" style ="position: absolute; bottom:0; left:32%">
+
+    <button class="s_whiteButton" id="WhiteButton">Add Error</button>
+    <button class="s_blackButton" id="BlackButton">Add Error</button>
+        <button class="s_redButton" id="RedButton">Add Error</button>
 </div>
-
-
+</div>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
