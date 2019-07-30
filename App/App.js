@@ -71,7 +71,8 @@ function ClearPage(){
 
 function ShowStatus(){
   //download machines
-  db.collection('m_test').get().then((snapshot) => {
+  db.collection('m_test').onSnapshot((snapshot) => {
+    ClearPage();
     console.log(snapshot.docs);
     snapshot.docs.forEach(doc => {
       CreateMachineHTML(doc);
@@ -221,11 +222,4 @@ function CheckifAdmin(user){
 }
 
 
-//the updating stuff
-var timer = setInterval(Refresh, 60000);
-
-function Refresh(){
-  ClearPage();
-  ShowStatus();
-}
 
