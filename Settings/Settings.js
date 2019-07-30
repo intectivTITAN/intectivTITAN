@@ -112,6 +112,8 @@ function AddToBlackList(doc){
     let err = document.createElement('li');
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
+    err.id = "B "+doc.data().m_name + " " +doc.data().value;
+    err.setAttribute("onclick", "deleteThis(this.id)");
     black.appendChild(err);
 }
 
@@ -119,13 +121,57 @@ function AddToRedList(doc){
     let err = document.createElement('li');
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
+    err.id = "R "+doc.data().m_name + " " +doc.data().value;
+    err.setAttribute("onclick", "deleteThis(this.id)");
     red.appendChild(err);
 }
 function AddToWhiteList(doc){
     let err = document.createElement('li');
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
+    err.id = "W "+doc.data().m_name + " " +doc.data().value;
+    err.setAttribute("onclick", "deleteThis(this.id)");
     white.appendChild(err);
+}
+
+function ShowDeleteModal(idOfError){
+
+}
+
+function deleteThis(idOfError) {
+    const itemToDelete = document.getElementById(idOfError);
+    console.log(idOfError);
+    var split = idOfError.split(" ");
+    var type = split[0];
+
+    switch(type){
+        case 'R':
+            db.collection("error-red").doc(split[1]+split[2]).delete().then(function(){
+                console.log("Deleted")
+            }).catch(function (error) {
+                console.log("Error with deleting: " + error);
+            });
+            break;
+
+        case 'W':
+            db.collection("error-white").doc(split[1]+split[2]).delete().then(function(){
+                console.log("Deleted")
+            }).catch(function (error) {
+                console.log("Error with deleting: " + error);
+            });
+            break;
+
+        case 'B':
+            db.collection("error-black").doc(split[1]+split[2]).delete().then(function(){
+                console.log("Deleted")
+            }).catch(function (error) {
+                console.log("Error with deleting: " + error);
+            });
+            break;
+
+    }
+
+    LoadErrors();
 }
 
 function SubmitError(type, name, code){
