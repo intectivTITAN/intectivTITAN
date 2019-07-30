@@ -1,5 +1,6 @@
 //-----------First off show the status---------
 ShowStatus();
+GetLastUpdate();
 //----------------------------------------------
 
 const pageContent = document.querySelector("#content");
@@ -73,10 +74,17 @@ function ShowStatus(){
   //download machines
   db.collection('m_test').onSnapshot((snapshot) => {
     ClearPage();
+    GetLastUpdate();
     console.log(snapshot.docs);
     snapshot.docs.forEach(doc => {
       CreateMachineHTML(doc);
     });
+  });
+}
+
+function GetLastUpdate(){
+  db.collection('lastUpdate').doc('lastUpdate').onSnapshot(function(doc){
+    console.log("Last update: " + doc.data().datetime.toDate());
   });
 }
 
