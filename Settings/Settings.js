@@ -8,6 +8,7 @@ firebase.auth().onAuthStateChanged(user => {
     }
 });
 
+const confirmModal = document.querySelector('#confirmModal');
 
 const red = document.querySelector('#RedList');
 const black = document.querySelector('#BlackList');
@@ -26,6 +27,8 @@ const blackModal = document.getElementById("blackModal");
 const redSubmit = document.querySelector('#SubmitRed');
 const blackSubmit = document.querySelector('#SubmitBlack');
 const whiteSubmit = document.querySelector('#SubmitWhite');
+
+confirmModal.style.display = "none";
 
 redModal.style.display = "none";
 whiteModal.style.display = "none";
@@ -113,7 +116,7 @@ function AddToBlackList(doc){
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
     err.id = "B "+doc.data().m_name + " " +doc.data().value;
-    err.setAttribute("onclick", "deleteThis(this.id)");
+    err.setAttribute("onclick", "ShowDeleteModal(this.id)");
     black.appendChild(err);
 }
 
@@ -122,7 +125,7 @@ function AddToRedList(doc){
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
     err.id = "R "+doc.data().m_name + " " +doc.data().value;
-    err.setAttribute("onclick", "deleteThis(this.id)");
+    err.setAttribute("onclick", "ShowDeleteModal(this.id)");
     red.appendChild(err);
 }
 function AddToWhiteList(doc){
@@ -130,12 +133,23 @@ function AddToWhiteList(doc){
     err.className = "s_li";
     err.innerText = doc.data().m_name + " " +doc.data().value;
     err.id = "W "+doc.data().m_name + " " +doc.data().value;
-    err.setAttribute("onclick", "deleteThis(this.id)");
+    err.setAttribute("onclick", "ShowDeleteModal(this.id)");
     white.appendChild(err);
 }
 
 function ShowDeleteModal(idOfError){
+    document.getElementById("deleteModalText").innerText = "Confirm deletion of: " + idOfError;
+    confirmModal.style.display = "block";
 
+    let confirm = document.getElementById("confirmDeleteButton").addEventListener('click', (e)=>{
+        e.preventDefault();
+        deleteThis(idOfError);
+    });
+
+    let reject = document.getElementById("rejectDeleteButton").addEventListener('click', (e) =>{
+        e.preventDefault();
+        confirmModal.style.display = "none";
+    });
 }
 
 function deleteThis(idOfError) {
@@ -171,6 +185,7 @@ function deleteThis(idOfError) {
 
     }
 
+    confirmModal.style.display = "none";
     LoadErrors();
 }
 
