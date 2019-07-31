@@ -223,10 +223,14 @@ const ShowEmail = (user) =>{
 
 //Check if user is admin
 function CheckifAdmin(user){
-  if(user.isAdmin != true){
-    button = document.getElementById("adminButton");
-    //button.parentNode.removeChild(button);
-  }
+  var DBuser = db.collection('users').doc(user.uid);
+  DBuser.get().then(function(doc){
+    if(doc.data().isAdmin != true){
+      button = document.getElementById("adminButton");
+      button.parentNode.removeChild(button);
+    }
+  });
+
 }
 
 
