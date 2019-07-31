@@ -184,9 +184,9 @@ function deleteThis(idOfError) {
             break;
 
     }
-
-    confirmModal.style.display = "none";
     LoadErrors();
+    confirmModal.style.display = "none";
+
 }
 
 function SubmitError(type, name, code){
