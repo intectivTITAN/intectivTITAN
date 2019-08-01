@@ -169,14 +169,22 @@ function CreateMachineHTML(doc){
   let identText = document.createElement('span');
   let breakPoint2 = document.createElement('br');
   let errorText = document.createElement('span');
+  let breakPoint3 = document.createElement('br');
+  let machineStuff = document.createElement('span');
+
   pdnText.textContent = "PDN: " + doc.data().pdn;
   identText.textContent = "Ident: " + doc.data().ident;
   errorText.textContent = "Error: " + doc.data().error;
+  machineStuff.textContent = "Spec: " + doc.data().spec;
+
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
   text.appendChild(identText);
   text.appendChild(breakPoint2);
   text.appendChild(errorText);
+  text.appendChild(breakPoint3);
+  text.appendChild(machineStuff);
+
 
 
   //the whole container
