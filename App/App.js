@@ -167,6 +167,7 @@ function CreateMachineHTML(doc){
   let pdnText = document.createElement('span');
   let breakPoint = document.createElement('br');
   let identText = document.createElement('span');
+  let breakPoint2 = document.createElement('br');
   let errorText = document.createElement('span');
   pdnText.textContent = "PDN: " + doc.data().pdn;
   identText.textContent = "Ident: " + doc.data().ident;
@@ -174,7 +175,7 @@ function CreateMachineHTML(doc){
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
   text.appendChild(identText);
-  text.appendChild(breakPoint);
+  text.appendChild(breakPoint2);
   text.appendChild(errorText);
 
 
