@@ -166,9 +166,17 @@ function CreateMachineHTML(doc){
   text.className = "m_text";
   let pdnText = document.createElement('span');
   let breakPoint = document.createElement('br');
+  let identText = document.createElement('span');
+  let errorText = document.createElement('span');
   pdnText.textContent = "PDN: " + doc.data().pdn;
+  identText.textContent = "Ident: " + doc.data().ident;
+  errorText.textContent = "Error: " + doc.data().error;
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
+  text.appendChild(identText);
+  text.appendChild(breakPoint);
+  text.appendChild(errorText);
+
 
   //the whole container
   container.className = "m_container scale4";
