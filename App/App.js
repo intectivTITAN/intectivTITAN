@@ -156,6 +156,9 @@ function CreateMachineHTML(doc){
   else if(doc.data().status.toString() == "error"){
     colorSpace.className = "m_inner m_inner-red";
   }
+  else if(doc.data().status.toString() == "off"){
+    colorSpace.className = "m_inner m_inner-black"
+  }
 
   img.src = doc.data().img;
   img.className = "m_img";
