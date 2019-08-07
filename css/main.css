@@ -125,6 +125,22 @@
   border-radius: 5px;
 }
 
+.h_button{
+  font-family: Roboto, sans-serif;
+  border: none;
+  font-size: 150%;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: #ececec;
+
+  background: linear-gradient(160deg, #1a85cc 60%, rgba(0,0,0,0) 60%), linear-gradient(120deg, #717171 90%, #1a85cc 90%);
+}
 
 .tg  {border-collapse:collapse;border-spacing:0;border:none; margin-top: 50px;}
 .tg td{font-family:Roboto, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}

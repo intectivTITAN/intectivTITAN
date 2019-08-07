@@ -3,6 +3,14 @@ ShowStatus();
 GetLastUpdate();
 //----------------------------------------------
 
+//----Containers and tables for history----
+let t_container = document.createElement('div');
+let table = document.createElement('table');
+
+table.id = "table";
+table.className = "tg";
+//They stop here
+
 let isHistory = false;
 
 const pageContent = document.querySelector("#content");
@@ -67,11 +75,23 @@ CurrentButtton.addEventListener('click',(e)=>{
 
 function ShowHistory() {
   //
-  //Create the machine selector
+  //Create the machine selector and type selector
+  //First we make the Type selector(LDI ATG MDI Press etc.)
+  //The we query all the machines and change the machines based on what we get back
   let container = document.createElement('div');
-  let machineSelector = document.createElement('select');
+  let TypeSelector = document.createElement('select');
   let option0 = document.createElement('option');
   let option1 = document.createElement('option');
+  let machineSelector = document.createElement('select');
+  let SearchButton = document.createElement('button');
+
+  SearchButton.className = "h_button";
+  SearchButton.innerText = "Search";
+
+  SearchButton.addEventListener('click', e =>{
+    e.preventDefault();
+    LoadHistoryData(TypeSelector.options[TypeSelector.selectedIndex].text, machineSelector.options[machineSelector.selectedIndex].text);
+  });
 
   option0.value = "ATG";
   option0.innerText = "ATG";
@@ -79,68 +99,89 @@ function ShowHistory() {
   option1.value = "LDI";
   option1.innerText = "LDI";
 
+  TypeSelector.className = "h_sel_opt";
   machineSelector.className = "h_sel_opt";
 
-  machineSelector.appendChild(option0);
-  machineSelector.appendChild(option1);
+  TypeSelector.appendChild(option0);
+  TypeSelector.appendChild(option1);
+
 
   container.className = "h_sel_container";
+  container.id = "whole_container";
+  container.appendChild(TypeSelector);
 
-  let t_container = document.createElement('div');
-  let table = document.createElement('table');
 
-  //t_container.className = "h_t_container";
-  table.id = "table";
-  table.className = "tg";
+  db.collection('m_test').get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc){
+        let newOption = document.createElement('option');
+        newOption.value = doc.data().name;
+        newOption.innerText = doc.data().name;
+        console.log(newOption.value);
+        machineSelector.appendChild(newOption);
+      });
+  });
 
   container.appendChild(machineSelector);
-  container.appendChild(t_container);
+  container.appendChild(SearchButton);
+
+  pageContent.appendChild(container);
+}
 
 
-  if(machineSelector.options[machineSelector.selectedIndex].text == "ATG"){
-    //console.log(machineSelector.options[machineSelector.selectedIndex].text)
-    //Create ATG
-    db.collection('ATGHistory').onSnapshot((snapshot) => {
+function LoadHistoryData(type, name){
 
-      var allElements = document.getElementById("table");
-      while(allElements.hasChildNodes()){
-        allElements.removeChild(allElements.firstChild);
-        console.log("We deleted all the rows")
-      }
 
-      GetLastUpdate();
-      console.log(snapshot.docs);
-      snapshot.docs.forEach(doc => {
+  db.collection("ATGHistory").where("name", "==", name).get()
+      .then(function(querySnapshot) {
+        ClearTable();
+        querySnapshot.forEach(function(doc) {
+          let newRow = document.createElement('tr');
+          let col0 = document.createElement('th');
+          let col1 = document.createElement('th');
+          let col2 = document.createElement('th');
+          let col3 = document.createElement('th');
+          let col4 = document.createElement('th');
+          let col5 = document.createElement('th');
 
-        let newRow = document.createElement('tr');
-        let col0 = document.createElement('th');
-        let col1 = document.createElement('th');
-        let col2 = document.createElement('th');
-        let col3 = document.createElement('th');
 
-        col0.innerText = doc.data().TimeTaken;
-        col1.innerText = doc.data().pdn;
-        col2.innerText = doc.data().SwapTime;
-        col3.innerText = doc.data().run;
+          col0.innerText = doc.data().TimeTaken;
+          col1.innerText = doc.data().pdn;
+          col2.innerText = doc.data().SwapTime;
+          col3.innerText = doc.data().run;
+          col4.innerText = doc.data().name;
+          col5.innerText = doc.data().TimeStamp;
 
-        col0.className = "tg-0lax";
-        col1.className = "tg-0lax";
-        col2.className = "tg-0lax";
-        col3.className = "tg-0lax";
 
-        newRow.appendChild(col0);
-        newRow.appendChild(col1);
-        newRow.appendChild(col2);
-        newRow.appendChild(col3);
+          col0.className = "tg-0lax";
+          col1.className = "tg-0lax";
+          col2.className = "tg-0lax";
+          col3.className = "tg-0lax";
+          col4.className = "tg-0lax";
+          col5.className = "tg-0lax";
 
-        table.appendChild(newRow);
+          newRow.appendChild(col4);
+          newRow.appendChild(col5);
+          newRow.appendChild(col0);
+          newRow.appendChild(col1);
+          newRow.appendChild(col2);
+          newRow.appendChild(col3);
+
+          table.appendChild(newRow);
+        });
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
       });
-    });
-    container.appendChild(table);
-    pageContent.appendChild(container);
-  }
-  else {
-    //DO ABSOLUTLY NOTHING CUZ JENKO HASNT CONNECTED IT TO THe FUCKING SERVER LIKE COME ON ASK A LINUX FRIEDN TO DO IT JUST MAKE IT WORK
+
+    t_container.appendChild(table);
+    document.getElementById("whole_container").appendChild(t_container);
+}
+
+function ClearTable() {
+  var allElements = document.getElementById("table");
+  while(allElements.hasChildNodes()){
+    allElements.removeChild(allElements.firstChild);
+    console.log("We deleted all the rows");
   }
 }
 
