@@ -142,14 +142,16 @@ function LoadHistoryData(type, name){
           let col3 = document.createElement('th');
           let col4 = document.createElement('th');
           let col5 = document.createElement('th');
+          let col6 = document.createElement('th');
 
 
           col0.innerText = doc.data().TimeTaken;
           col1.innerText = doc.data().pdn;
           col2.innerText = doc.data().SwapTime;
-          col3.innerText = doc.data().run;
+          col3.innerText = doc.data().ident;
           col4.innerText = doc.data().name;
           col5.innerText = doc.data().TimeStamp;
+          col6.innerText = doc.data().run;
 
 
           col0.className = "tg-0lax";
@@ -158,6 +160,7 @@ function LoadHistoryData(type, name){
           col3.className = "tg-0lax";
           col4.className = "tg-0lax";
           col5.className = "tg-0lax";
+          col6.className = "tg-0lax";
 
           newRow.appendChild(col4);
           newRow.appendChild(col5);
@@ -165,6 +168,7 @@ function LoadHistoryData(type, name){
           newRow.appendChild(col1);
           newRow.appendChild(col2);
           newRow.appendChild(col3);
+          newRow.appendChild(col6);
 
           table.appendChild(newRow);
         });
