@@ -3,6 +3,8 @@ ShowStatus();
 GetLastUpdate();
 //----------------------------------------------
 
+let isHistory = false;
+
 const pageContent = document.querySelector("#content");
 
 const adminButton = document.querySelector('#adminButton');
@@ -47,7 +49,8 @@ const HistoryButton = document.querySelector('#histroyButton');
 HistoryButton.addEventListener('click', (e)=>{
   e.preventDefault();
   ClearPage();
-  //ShowHistory();
+  ShowHistory();
+  isHistory = true;
   HistoryButton.className = "active";
   CurrentButtton.className ="";
 });
@@ -57,10 +60,89 @@ CurrentButtton.addEventListener('click',(e)=>{
   e.preventDefault();
   ClearPage();
   ShowStatus();
+  isHistory = false;
   HistoryButton.className = "";
   CurrentButtton.className ="active";
 });
 
+function ShowHistory() {
+  //
+  //Create the machine selector
+  let container = document.createElement('div');
+  let machineSelector = document.createElement('select');
+  let option0 = document.createElement('option');
+  let option1 = document.createElement('option');
+
+  option0.value = "ATG";
+  option0.innerText = "ATG";
+
+  option1.value = "LDI";
+  option1.innerText = "LDI";
+
+  machineSelector.className = "h_sel_opt";
+
+  machineSelector.appendChild(option0);
+  machineSelector.appendChild(option1);
+
+  container.className = "h_sel_container";
+
+  let t_container = document.createElement('div');
+  let table = document.createElement('table');
+
+  //t_container.className = "h_t_container";
+  table.id = "table";
+  table.className = "tg";
+
+  container.appendChild(machineSelector);
+  container.appendChild(t_container);
+
+
+  if(machineSelector.options[machineSelector.selectedIndex].text == "ATG"){
+    //console.log(machineSelector.options[machineSelector.selectedIndex].text)
+    //Create ATG
+    db.collection('ATGHistory').onSnapshot((snapshot) => {
+
+      var allElements = document.getElementById("table");
+      while(allElements.hasChildNodes()){
+        allElements.removeChild(allElements.firstChild);
+        console.log("We deleted all the rows")
+      }
+
+      GetLastUpdate();
+      console.log(snapshot.docs);
+      snapshot.docs.forEach(doc => {
+
+        let newRow = document.createElement('tr');
+        let col0 = document.createElement('th');
+        let col1 = document.createElement('th');
+        let col2 = document.createElement('th');
+        let col3 = document.createElement('th');
+
+        col0.innerText = doc.data().TimeTaken;
+        col1.innerText = doc.data().pdn;
+        col2.innerText = doc.data().SwapTime;
+        col3.innerText = doc.data().run;
+
+        col0.className = "tg-0lax";
+        col1.className = "tg-0lax";
+        col2.className = "tg-0lax";
+        col3.className = "tg-0lax";
+
+        newRow.appendChild(col0);
+        newRow.appendChild(col1);
+        newRow.appendChild(col2);
+        newRow.appendChild(col3);
+
+        table.appendChild(newRow);
+      });
+    });
+    container.appendChild(table);
+    pageContent.appendChild(container);
+  }
+  else {
+    //DO ABSOLUTLY NOTHING CUZ JENKO HASNT CONNECTED IT TO THe FUCKING SERVER LIKE COME ON ASK A LINUX FRIEDN TO DO IT JUST MAKE IT WORK
+  }
+}
 
 //Clear page
 function ClearPage(){
@@ -73,12 +155,14 @@ function ClearPage(){
 function ShowStatus(){
   //download machines
   db.collection('m_test').onSnapshot((snapshot) => {
+    if(!isHistory){
     ClearPage();
     GetLastUpdate();
     console.log(snapshot.docs);
-    snapshot.docs.forEach(doc => {
-      CreateMachineHTML(doc);
-    });
+      snapshot.docs.forEach(doc => {
+        CreateMachineHTML(doc);
+      });
+    }
   });
 }
 
