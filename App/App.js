@@ -108,7 +108,7 @@ function ShowHistory() {
 
   container.className = "h_sel_container";
   container.id = "whole_container";
-  container.appendChild(TypeSelector);
+  //container.appendChild(TypeSelector); //; overflow-y:auto
 
 
   db.collection('m_test').get().then(function(querySnapshot) {
@@ -177,6 +177,7 @@ function LoadHistoryData(type, name){
         console.log("Error getting documents: ", error);
       });
 
+    t_container.setAttribute("style","overflow:auto;height:700px;width:800px;margin-top:20px");
     t_container.appendChild(table);
     document.getElementById("whole_container").appendChild(t_container);
 }
