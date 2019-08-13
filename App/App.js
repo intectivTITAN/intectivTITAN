@@ -129,7 +129,46 @@ function ShowHistory() {
 
 
 function LoadHistoryData(type, name){
+  let newRow = document.createElement('tr');
+  let col0 = document.createElement('th');
+  let col1 = document.createElement('th');
+  let col2 = document.createElement('th');
+  let col3 = document.createElement('th');
+  let col4 = document.createElement('th');
+  let col5 = document.createElement('th');
+  let col6 = document.createElement('th');
+  let col7 = document.createElement('th')
 
+
+  col0.innerText ="Time Taken"
+  col1.innerText = "PDN"
+  col2.innerText = "Swap Time"
+  col3.innerText = "Ident"
+  col4.innerText = "Name"
+  col5.innerText = "Time Stamp"
+  col6.innerText = "Spec"
+  col7.innerText = "Date"
+
+
+  col0.className = "tg-0lax";
+  col1.className = "tg-0lax";
+  col2.className = "tg-0lax";
+  col3.className = "tg-0lax";
+  col4.className = "tg-0lax";
+  col5.className = "tg-0lax";
+  col6.className = "tg-0lax";
+  col7.className = "tg-0lax";
+
+  newRow.appendChild(col4);
+  newRow.appendChild(col5);
+  newRow.appendChild(col0);
+  newRow.appendChild(col1);
+  newRow.appendChild(col2);
+  newRow.appendChild(col3);
+  newRow.appendChild(col6);
+  newRow.appendChild(col7);
+
+  table.appendChild(newRow);
 
   db.collection("ATGHistory").where("name", "==", name).get()
       .then(function(querySnapshot) {
@@ -143,6 +182,7 @@ function LoadHistoryData(type, name){
           let col4 = document.createElement('th');
           let col5 = document.createElement('th');
           let col6 = document.createElement('th');
+          let col7 = document.createElement('th')
 
 
           col0.innerText = doc.data().TimeTaken;
@@ -152,6 +192,7 @@ function LoadHistoryData(type, name){
           col4.innerText = doc.data().name;
           col5.innerText = doc.data().TimeStamp;
           col6.innerText = doc.data().run;
+          col7.innerText = doc.data().date;
 
 
           col0.className = "tg-0lax";
@@ -161,6 +202,7 @@ function LoadHistoryData(type, name){
           col4.className = "tg-0lax";
           col5.className = "tg-0lax";
           col6.className = "tg-0lax";
+          col7.className = "tg-0lax";
 
           newRow.appendChild(col4);
           newRow.appendChild(col5);
@@ -169,6 +211,7 @@ function LoadHistoryData(type, name){
           newRow.appendChild(col2);
           newRow.appendChild(col3);
           newRow.appendChild(col6);
+          newRow.appendChild(col7);
 
           table.appendChild(newRow);
         });
@@ -177,7 +220,7 @@ function LoadHistoryData(type, name){
         console.log("Error getting documents: ", error);
       });
 
-    t_container.setAttribute("style","overflow:auto;height:700px;width:800px;margin-top:20px");
+    t_container.setAttribute("style","box-shadow: inset 0px 0px 17px -6px rgba(54,43,54,1);overflow:auto;height:700px;width:800px;margin-top:20px");
     t_container.appendChild(table);
     document.getElementById("whole_container").appendChild(t_container);
 }
