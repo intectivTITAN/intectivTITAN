@@ -5,7 +5,9 @@ GetLastUpdate();
 
 //----Containers and tables for history----
 let t_container = document.createElement('div');
-let table = document.createElement('table');
+let Wholetable = document.createElement('table');
+let table = document.createElement('tbody');
+let tHead = document.createElement('thead');
 
 table.id = "table";
 table.className = "tg";
@@ -89,8 +91,15 @@ function ShowHistory() {
   SearchButton.innerText = "Search";
 
   SearchButton.addEventListener('click', e =>{
+    //console.log(machineSelector.options[machineSelector.selectedIndex].text)
     e.preventDefault();
-    LoadHistoryData(TypeSelector.options[TypeSelector.selectedIndex].text, machineSelector.options[machineSelector.selectedIndex].text);
+    if(machineSelector.options[machineSelector.selectedIndex].text == "LDI"){
+      LoadHistoryData("LDI", machineSelector.options[machineSelector.selectedIndex].text);
+    }
+    else{
+      LoadHistoryData("ATG", machineSelector.options[machineSelector.selectedIndex].text);
+    }
+
   });
 
   option0.value = "ATG";
@@ -137,7 +146,6 @@ function LoadHistoryData(type, name){
   let col4 = document.createElement('th');
   let col5 = document.createElement('th');
   let col6 = document.createElement('th');
-  let col7 = document.createElement('th')
 
 
   col0.innerText ="Time Taken"
@@ -147,7 +155,6 @@ function LoadHistoryData(type, name){
   col4.innerText = "Name"
   col5.innerText = "Time Stamp"
   col6.innerText = "Spec"
-  col7.innerText = "Date"
 
 
   col0.className = "tg-0lax";
@@ -157,7 +164,6 @@ function LoadHistoryData(type, name){
   col4.className = "tg-0lax";
   col5.className = "tg-0lax";
   col6.className = "tg-0lax";
-  col7.className = "tg-0lax";
 
   newRow.appendChild(col4);
   newRow.appendChild(col5);
@@ -166,11 +172,10 @@ function LoadHistoryData(type, name){
   newRow.appendChild(col2);
   newRow.appendChild(col3);
   newRow.appendChild(col6);
-  newRow.appendChild(col7);
 
-  table.appendChild(newRow);
+  tHead.appendChild(newRow);
 
-  db.collection("ATGHistory").where("name", "==", name).get()
+  db.collection(type + "History").where("name", "==", name).get()
       .then(function(querySnapshot) {
         ClearTable();
         querySnapshot.forEach(function(doc) {
@@ -220,8 +225,10 @@ function LoadHistoryData(type, name){
         console.log("Error getting documents: ", error);
       });
 
+    Wholetable.appendChild(tHead);
+    Wholetable.appendChild(table);
     t_container.setAttribute("style","box-shadow: inset 0px 0px 17px -6px rgba(54,43,54,1);overflow:auto;height:700px;width:800px;margin-top:20px");
-    t_container.appendChild(table);
+    t_container.appendChild(Wholetable);
     document.getElementById("whole_container").appendChild(t_container);
 }
 
