@@ -254,9 +254,21 @@ function ShowStatus(){
     if(!isHistory){
     ClearPage();
     GetLastUpdate();
+
+    var isATG = document.querySelector('#cs_s_ATG').checked;
+    var isCNC = document.querySelector('#cs_s_CNC').checked;
+
     console.log(snapshot.docs);
       snapshot.docs.forEach(doc => {
-        CreateMachineHTML(doc);
+        if(isATG && doc.data().name[0] == "a"){
+          CreateMachineHTML(doc);
+        }
+        else if(isCNC && doc.data().name[0] != "a" && doc.data().name[1] != "D"){
+          CreateMachineHTML(doc);
+        }
+        else if(!isCNC && !isATG){
+          CreateMachineHTML(doc);
+        }
       });
     }
   });
@@ -315,6 +327,7 @@ $(document).ready(function () {
 });
 
 function CreateMachineHTML(doc){
+
   let img = document.createElement('img');
   let container = document.createElement('div');
   let center = document.createElement('center');

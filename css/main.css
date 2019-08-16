@@ -234,7 +234,10 @@
  margin-bottom: 20px;
 }
 
-
+.cs_s_checkbox{
+  color: #c0c0c0;
+  font-family: Roboto, sans-serif;
+}
 
 .loginWelcome{
   color: rgba(21,108,232,0.79);
