@@ -49,7 +49,9 @@ signupForm.addEventListener('submit', (e) => {
   const password = signupForm['signup-password'].value;
   const code = signupForm['signup-code'].value;
 
-  if(currentCode == code){
+  hasedCode = md5(code);
+
+  if(currentCode == hasedCode){
     // sign up the user
     /*firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       return db.collection('users').doc(cred.user.uid).set({
