@@ -60,150 +60,13 @@ logout.addEventListener('click', (e) => {
   firebase.auth().signOut();
 });
 
-//History
-const HistoryButton = document.querySelector('#histroyButton');
-HistoryButton.addEventListener('click', (e)=>{
-  e.preventDefault();
-  ClearPage();
-  ShowHistory();
-  isHistory = true;
-  isStatus = false;
-  HistoryButton.className = "active";
-  pieChartButton.className = "";
-  CurrentButtton.className ="";
-});
-
-function ShowHistory() {
-  //
-  //Create the machine selector and type selector
-  //First we make the Type selector(LDI ATG MDI Press etc.)
-  //The we query all the machines and change the machines based on what we get back
-  let container = document.createElement('div');
-  let TypeSelector = document.createElement('select');
-  let option0 = document.createElement('option');
-  let option1 = document.createElement('option');
-  let machineSelector = document.createElement('select');
-  let SearchButton = document.createElement('button');
-
-  SearchButton.className = "h_button";
-  SearchButton.innerText = "Search";
-
-  SearchButton.addEventListener('click', e =>{
-    //console.log(machineSelector.options[machineSelector.selectedIndex].text)
-    e.preventDefault();
-    if(machineSelector.options[machineSelector.selectedIndex].text == "LDI"){
-      LoadHistoryData("LDI", machineSelector.options[machineSelector.selectedIndex].text);
-    }
-    else{
-      LoadHistoryData("ATG", machineSelector.options[machineSelector.selectedIndex].text);
-    }
-
-  });
-
-  option0.value = "ATG";
-  option0.innerText = "ATG";
-
-  option1.value = "LDI";
-  option1.innerText = "LDI";
-
-  TypeSelector.className = "h_sel_opt";
-  machineSelector.className = "h_sel_opt";
-
-  TypeSelector.appendChild(option0);
-  TypeSelector.appendChild(option1);
-
-
-  container.className = "h_sel_container";
-  container.id = "whole_container";
-  //container.appendChild(TypeSelector); //; overflow-y:auto
-
-
-  db.collection('m_test').get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc){
-      let newOption = document.createElement('option');
-      newOption.value = doc.data().name;
-      newOption.innerText = doc.data().name;
-      console.log(newOption.value);
-      machineSelector.appendChild(newOption);
-    });
-  });
-
-  container.appendChild(machineSelector);
-  container.appendChild(SearchButton);
-
-  pageContent.appendChild(container);
-}
-
-//Pie chart
-const pieChartButton = document.getElementById("pieChartButton");
-pieChartButton.addEventListener('click', (e)=>{
-  console.log("start of button click");
-  e.preventDefault();
-  ClearPage();
-  ShowChart();
-  isHistory = false;
-  isStatus = false;
-  HistoryButton.className = "";
-  pieChartButton.className = "active";
-  CurrentButtton.className = "";
-  console.log("end of button click");
-});
-
-function ShowChart() {
-  console.log(" start of ShowChart()");
-  // HTML
-  let container = document.createElement("div");
-  container.class = "col-md-10";
-  container.style.margin = "auto";
-  container.style.backgroundColor = "#ff0000";
-
-  let search = document.createElement("input");
-  search.class = "col-md-3";
-  search.placeholder = "machine name";
-  search.id = "searchBar";
-  container.appendChild(search);
-
-  let chart = document.createElement("div");
-  chart.id = "pieChart";
-  chart.class = "col-md-10";
-  chart.style.margin = "auto";
-  container.style.backgroundColor = "#00ff00";
-
-  let options = document.createElement("div");
-  options.class = "col-md-10";
-  options.style.margin = "auto";
-  container.style.backgroundColor = "#0000ff";
-
-  let from = document.createElement("input");
-  from.id = "from";
-  from.class = "col-md-3";
-  from.style.margin = "auto";
-  from.pattern = "[0-9]{4}-[0,9]{2}-[0,9]{2}";
-  options.appendChild(from);
-
-  let to = document.createElement("input");
-  to.id = "to";
-  to.class = "col-md-3";
-  to.style.margin = "auto";
-  to.pattern = "[0-9]{4}-[0,9]{2}-[0,9]{2}";
-  options.appendChild(to);
-}
-
-function parseDate(str) {
-  var x = str.split('-');
-  return new Date(x[0], x[1], x[2]);
-}
-
-function datediff(first, second) {
-  return Math.round((second-first)/(1000*60*60*24));
-}
-
 const CurrentButtton = document.querySelector("#statusButton");
 CurrentButtton.addEventListener('click',(e)=>{
   e.preventDefault();
   ClearPage();
   ShowStatus();
   isHistory = false;
+  isStatus = true;
   HistoryButton.className = "";
   pieChartButton.className = "";
   CurrentButtton.className ="active";
@@ -323,7 +186,7 @@ function ClearPage(){
 function ShowStatus(){
   //download machines
   db.collection('m_test').onSnapshot((snapshot) => {
-    if(!isHistory){
+    if(isStatus){
       ClearPage();
       GetLastUpdate();
 
