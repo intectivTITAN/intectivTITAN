@@ -30,13 +30,23 @@ const sb_5 = document.querySelector('#SB_5');//1.25
 const sb_3 = document.querySelector('#SB_3');//.75
 const sb_4 = document.querySelector('#SB_4');//1
 
+var currFFZoom = 1;
+var currIEZoom = 100;
+
+
+document.getElementById("SB_5").addEventListener('click', function() {
+  document.body.style.transform = "scale(1.02)";
+});
+
+
+
 //event listners
 adminButton.addEventListener(('click'), (e)=>{
   e.preventDefault();
   window.location.href = "../Settings/Settings.html";
 });
 
-sb_5.addEventListener('click', (e)=>{
+/*sb_5.addEventListener('click', (e)=>{
   e.preventDefault();
   ChangeUIScale(5);
 });
@@ -49,7 +59,7 @@ sb_3.addEventListener('click', (e)=>{
 sb_4.addEventListener('click', (e)=>{
   e.preventDefault();
   ChangeUIScale(4);
-});
+});*/
 
 
 // logout
