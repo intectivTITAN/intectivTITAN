@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>IntecTIV TITAN</title>
+  <meta charset="UTF-8">
+  <title>IntecTIV TITAN</title>
 
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="manifest" href="../site.webmanifest">
-<link rel="apple-touch-icon" href="../icon.png">
-<!-- Place favicon.ico in the root directory -->
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <!-- Place favicon.ico in the root directory -->
 
-<link rel="stylesheet" href="../css/normalize.css">
-<link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/main.css">
 
-<!-- Google Font Roboto -->
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Google Font Roboto -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-<meta name="theme-color" content="#fafafa">
+  <!--------------------Scripts-------------------->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!----------------------------------------------->
+
+
+
+  <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
@@ -35,7 +41,8 @@
       <ul class="nav navbar-nav navbar-right" style="box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);">
         <li class="active" id="statusButton"><a>Current status</a></li>
         <li id="histroyButton"><a>History</a></li>
-        <li ><a id="logout">Logout</a></li>
+        <li id="pieChartButton"><a>Pie chart</a></li>
+        <li id="logout"><a>Logout</a></li>
 
       </ul>
     </div>
@@ -57,12 +64,12 @@
 
 
   <!-- Page Content -->
-    <div id="content" style=" position: fixed;top: 80px; left: 250px">
-
-    </div>
-
+  <div id="content" style=" position: fixed;top: 80px; left: 250px">
 
   </div>
+
+
+</div>
 <div style ="position: absolute; bottom:0; left:50%;">
   <button class="appButtonLeft" id="SB_3">0.75</button>
   <button class="appButtonLeft" id="SB_4">1</button>

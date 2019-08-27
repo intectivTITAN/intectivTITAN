@@ -3,6 +3,7 @@ ShowStatus();
 GetLastUpdate();
 //----------------------------------------------
 
+
 //----Containers and tables for history----
 let t_container = document.createElement('div');
 let Wholetable = document.createElement('table');
@@ -14,10 +15,15 @@ table.className = "tg";
 //They stop here
 
 let isHistory = false;
+let isStatus = true;
 
 const pageContent = document.querySelector("#content");
 
 const adminButton = document.querySelector('#adminButton');
+
+google.charts.load('current', {'packages':['corechart']});
+//google.charts.setOnLoadCallback(ShowChart);
+
 
 //Scale buttons
 const sb_5 = document.querySelector('#SB_5');//1.25
@@ -61,18 +67,10 @@ HistoryButton.addEventListener('click', (e)=>{
   ClearPage();
   ShowHistory();
   isHistory = true;
+  isStatus = false;
   HistoryButton.className = "active";
+  pieChartButton.className = "";
   CurrentButtton.className ="";
-});
-
-const CurrentButtton = document.querySelector("#statusButton");
-CurrentButtton.addEventListener('click',(e)=>{
-  e.preventDefault();
-  ClearPage();
-  ShowStatus();
-  isHistory = false;
-  HistoryButton.className = "";
-  CurrentButtton.className ="active";
 });
 
 function ShowHistory() {
@@ -122,12 +120,12 @@ function ShowHistory() {
 
   db.collection('m_test').get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc){
-        let newOption = document.createElement('option');
-        newOption.value = doc.data().name;
-        newOption.innerText = doc.data().name;
-        console.log(newOption.value);
-        machineSelector.appendChild(newOption);
-      });
+      let newOption = document.createElement('option');
+      newOption.value = doc.data().name;
+      newOption.innerText = doc.data().name;
+      console.log(newOption.value);
+      machineSelector.appendChild(newOption);
+    });
   });
 
   container.appendChild(machineSelector);
@@ -136,6 +134,80 @@ function ShowHistory() {
   pageContent.appendChild(container);
 }
 
+//Pie chart
+const pieChartButton = document.getElementById("pieChartButton");
+pieChartButton.addEventListener('click', (e)=>{
+  console.log("start of button click");
+  e.preventDefault();
+  ClearPage();
+  ShowChart();
+  isHistory = false;
+  isStatus = false;
+  HistoryButton.className = "";
+  pieChartButton.className = "active";
+  CurrentButtton.className = "";
+  console.log("end of button click");
+});
+
+function ShowChart() {
+  console.log(" start of ShowChart()");
+  // HTML
+  let container = document.createElement("div");
+  container.class = "col-md-10";
+  container.style.margin = "auto";
+  container.style.backgroundColor = "#ff0000";
+
+  let search = document.createElement("input");
+  search.class = "col-md-3";
+  search.placeholder = "machine name";
+  search.id = "searchBar";
+  container.appendChild(search);
+
+  let chart = document.createElement("div");
+  chart.id = "pieChart";
+  chart.class = "col-md-10";
+  chart.style.margin = "auto";
+  container.style.backgroundColor = "#00ff00";
+
+  let options = document.createElement("div");
+  options.class = "col-md-10";
+  options.style.margin = "auto";
+  container.style.backgroundColor = "#0000ff";
+
+  let from = document.createElement("input");
+  from.id = "from";
+  from.class = "col-md-3";
+  from.style.margin = "auto";
+  from.pattern = "[0-9]{4}-[0,9]{2}-[0,9]{2}";
+  options.appendChild(from);
+
+  let to = document.createElement("input");
+  to.id = "to";
+  to.class = "col-md-3";
+  to.style.margin = "auto";
+  to.pattern = "[0-9]{4}-[0,9]{2}-[0,9]{2}";
+  options.appendChild(to);
+}
+
+function parseDate(str) {
+  var x = str.split('-');
+  return new Date(x[0], x[1], x[2]);
+}
+
+function datediff(first, second) {
+  return Math.round((second-first)/(1000*60*60*24));
+}
+
+const CurrentButtton = document.querySelector("#statusButton");
+CurrentButtton.addEventListener('click',(e)=>{
+  e.preventDefault();
+  ClearPage();
+  ShowStatus();
+  isHistory = false;
+  HistoryButton.className = "";
+  pieChartButton.className = "";
+  CurrentButtton.className ="active";
+});
 
 function LoadHistoryData(type, name){
   let newRow = document.createElement('tr');
@@ -191,9 +263,9 @@ function LoadHistoryData(type, name){
 
 
           col0.innerText = doc.data().TimeTaken;
-          col1.innerText = doc.data().pdn;
+          col1.innerText = doc.data().data.toString().split("|")[1];
           col2.innerText = doc.data().SwapTime;
-          col3.innerText = doc.data().ident;
+          col3.innerText = doc.data().data.toString().split("|")[2];
           col4.innerText = doc.data().name;
           col5.innerText = doc.data().TimeStamp;
           col6.innerText = doc.data().run;
@@ -225,11 +297,11 @@ function LoadHistoryData(type, name){
         console.log("Error getting documents: ", error);
       });
 
-    Wholetable.appendChild(tHead);
-    Wholetable.appendChild(table);
-    t_container.setAttribute("style","box-shadow: inset 0px 0px 17px -6px rgba(54,43,54,1);overflow:auto;height:700px;width:800px;margin-top:20px");
-    t_container.appendChild(Wholetable);
-    document.getElementById("whole_container").appendChild(t_container);
+  Wholetable.appendChild(tHead);
+  Wholetable.appendChild(table);
+  t_container.setAttribute("style","box-shadow: inset 0px 0px 17px -6px rgba(54,43,54,1);overflow:auto;height:700px;width:800px;margin-top:20px");
+  t_container.appendChild(Wholetable);
+  document.getElementById("whole_container").appendChild(t_container);
 }
 
 function ClearTable() {
@@ -252,13 +324,13 @@ function ShowStatus(){
   //download machines
   db.collection('m_test').onSnapshot((snapshot) => {
     if(!isHistory){
-    ClearPage();
-    GetLastUpdate();
+      ClearPage();
+      GetLastUpdate();
 
-    var isATG = document.querySelector('#cs_s_ATG').checked;
-    var isCNC = document.querySelector('#cs_s_CNC').checked;
+      var isATG = document.querySelector('#cs_s_ATG').checked;
+      var isCNC = document.querySelector('#cs_s_CNC').checked;
 
-    console.log(snapshot.docs);
+      console.log(snapshot.docs);
       snapshot.docs.forEach(doc => {
         if(isATG && doc.data().name[0] == "a"){
           CreateMachineHTML(doc);
@@ -339,21 +411,23 @@ function CreateMachineHTML(doc){
   H_name.style.textAlign = "center";
   H_name.textContent = doc.data().name;
 
+  const read = doc.data();
+
   //img and color
-  if(doc.data().status.toString() == "running"){
+  if(read.data.toString().split("|")[0] == "running"){
     colorSpace.className = "m_inner m_inner-green";
   }
-  else if(doc.data().status.toString() == "idle"){
+  else if(read.data.toString().split("|")[0] == "idle"){
     colorSpace.className = "m_inner m_inner-yellow";
   }
-  else if(doc.data().status.toString() == "error"){
+  else if(read.data.toString().split("|")[0] == "error"){
     colorSpace.className = "m_inner m_inner-red";
   }
-  else if(doc.data().status.toString() == "off"){
+  else if(read.data.toString().split("|")[0] == "off"){
     colorSpace.className = "m_inner m_inner-black"
   }
 
-  img.src = doc.data().img;
+  img.src = read.img;
   img.className = "m_img";
 
   colorSpace.appendChild(img);
@@ -368,10 +442,10 @@ function CreateMachineHTML(doc){
   let breakPoint3 = document.createElement('br');
   let machineStuff = document.createElement('span');
 
-  pdnText.textContent = "PDN: " + doc.data().pdn;
-  identText.textContent = "Ident: " + doc.data().ident;
-  errorText.textContent = "Error: " + doc.data().error;
-  machineStuff.textContent = "Spec: " + doc.data().spec;
+  pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
+  identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
+  errorText.textContent = "Error: " + doc.data().data.toString().split("|")[4];
+  machineStuff.textContent = "Spec: " + doc.data().data.toString().split("|")[3];
 
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
@@ -447,4 +521,6 @@ function CheckifAdmin(user){
 }
 
 
+function extractData(str) {
 
+}
