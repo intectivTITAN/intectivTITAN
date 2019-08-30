@@ -316,9 +316,19 @@ function CreateMachineHTML(doc){
   let machineStuff = document.createElement('span');
 
   pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
-  identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
   errorText.textContent = "Error: " + doc.data().data.toString().split("|")[4];
   machineStuff.textContent = "Spec: " + doc.data().data.toString().split("|")[3];
+
+  if(doc.data().name[0] == "a"){
+    identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
+  }
+  else if(doc.data().name[0] != "a" && doc.data().name[1] != "D"){
+    identText.textContent = "End time: " + doc.data().data.toString().split("|")[2];
+  }
+  else if(doc.data().name[0] != "a" && doc.data().name[1] == "D"){
+    identText.textContent = "None: " + doc.data().data.toString().split("|")[2];
+  }
+
 
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
