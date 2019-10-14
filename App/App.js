@@ -317,7 +317,17 @@ function CreateMachineHTML(doc){
 
   pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
   errorText.textContent = "Error: " + doc.data().data.toString().split("|")[4];
-  machineStuff.textContent = "Spec: " + doc.data().data.toString().split("|")[3];
+
+  if(doc.data().name == "MDI"){
+    var number =  doc.data().data.toString().split("|")[3];
+    machineStuff.textContent = "Spec: " + number / 2;
+  }
+  else{
+    var number =  doc.data().data.toString().split("|")[3];
+    machineStuff.textContent = "Spec: " + number;
+  }
+
+
 
   if(doc.data().name[0] == "a"){
     identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
