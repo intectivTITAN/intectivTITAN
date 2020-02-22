@@ -429,6 +429,8 @@ function CreateMachineHTML(doc){
         table.appendChild(vrstica);
       }
     });
+
+    document.getElementById("exampleModalCenter").style.opacity = "1";
   };
 }
 
