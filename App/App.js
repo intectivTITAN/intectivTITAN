@@ -24,6 +24,30 @@ const adminButton = document.querySelector('#adminButton');
 google.charts.load('current', {'packages':['corechart']});
 //google.charts.setOnLoadCallback(ShowChart);
 
+//----------------------------------------------------
+const machName = {
+  a2: "ATG5",
+  a5b: "ATG6",
+  a6b: "ATG2",
+  a3: "ATG3",
+  a6a: "ATG4",
+  a5a: "ATG1",
+  LDI: "LDI",
+  MDI: "MDI",
+  LMB2_2: "CNC7",
+  E6: "CNC",
+  SPEEDM: "CNC4",
+  MXR_1: "CNC8",
+  MXR_2: "CNC3",
+  MXR_3: "CNC1",
+  MXR_4: "CNC2",
+  Modul_1: "CNC9",
+  Modul_2: "CNC10",
+  Modul_3: "CNC11",
+  PPC1: "PPC1",
+  PPC2: "PPC2"
+
+};
 
 //Scale buttons
 const sb_5 = document.querySelector('#SB_5');//1.25
@@ -272,7 +296,6 @@ $(document).ready(function () {
 });
 
 function CreateMachineHTML(doc){
-
   let img = document.createElement('img');
   let container = document.createElement('div');
   let center = document.createElement('center');
@@ -316,9 +339,29 @@ function CreateMachineHTML(doc){
   let machineStuff = document.createElement('span');
 
   pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
-  identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
   errorText.textContent = "Error: " + doc.data().data.toString().split("|")[4];
-  machineStuff.textContent = "Spec: " + doc.data().data.toString().split("|")[3];
+
+  if(doc.data().name == "MDI"){
+    var number =  doc.data().data.toString().split("|")[3];
+    machineStuff.textContent = "Spec: " + number / 2;
+  }
+  else{
+    var number =  doc.data().data.toString().split("|")[3];
+    machineStuff.textContent = "Spec: " + number;
+  }
+
+
+
+  if(doc.data().name[0] == "a"){
+    identText.textContent = "Ident: " + doc.data().data.toString().split("|")[2];
+  }
+  else if(doc.data().name[0] != "a" && doc.data().name[1] != "D"){
+    identText.textContent = "End time: " + doc.data().data.toString().split("|")[2];
+  }
+  else if(doc.data().name[0] != "a" && doc.data().name[1] == "D"){
+    identText.textContent = "None: " + doc.data().data.toString().split("|")[2];
+  }
+
 
   text.appendChild(pdnText);
   text.appendChild(breakPoint);
@@ -341,7 +384,60 @@ function CreateMachineHTML(doc){
 
   pageContent.appendChild(container);
 
+  //get the table
+  container.setAttribute("data-toggle", "modal")
+  container.setAttribute("data-target", "#exampleModalCenter")
+  container.setAttribute("type", "button")
+
+  //modify the table when opened
+  container.onclick = function () {
+    table = document.getElementById("table-body");
+
+    //all " " and "-" are replaced with "_" and used as keys to get the right document
+    var key = machName[ (doc.data().name.replace(" ", "_")).replace("-", "_") ];
+    var DF = db.collection('DFpS').doc(key).get().then(function (doc) {
+      //prepare variable names
+      var vrstica
+      var stolp1
+      var stolp2
+      var stolp3
+
+      table.innerHTML = null;
+      var data = [];
+      for(y in doc.data()) {
+          data.push(y);
+      }
+      data.reverse();
+
+      var x;
+      for(i in data) {
+          x = data[i];
+          console.log(x);
+
+        vrstica = document.createElement("tr");
+        stolp1 = document.createElement("th");
+        stolp1.innerText = x.substr(0, 10);
+        stolp2 = document.createElement("th");
+        stolp2.innerText = x.substr(11);
+        stolp3 = document.createElement("th");
+        stolp3.innerText = doc.data()[x];
+
+        vrstica.appendChild(stolp1);
+        vrstica.appendChild(stolp2);
+        vrstica.appendChild(stolp3);
+
+        table.appendChild(vrstica);
+      }
+    });
+  };
 }
+
+// modal manipulation
+$(document).on('shown.bs.modal', function () {
+  $('#exampleModalCenter').modal('show');
+  $('#exampleModalCenter')[0].setAttribute("aria-hidden", true)
+  console.log("modal show")
+});
 
 function ChangeUIScale(size){
   var allElements = document.getElementById("content");
