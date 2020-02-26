@@ -411,6 +411,7 @@ function CreateMachineHTML(doc){
 
       var x;
       for(i in data) {
+        if(i == 9) break;
           x = data[i];
           console.log(x);
 
