@@ -392,6 +392,7 @@ function CreateMachineHTML(doc){
   //modify the table when opened
   container.onclick = function () {
     table = document.getElementById("table-body");
+    table.innerHTML = null;
 
     //all " " and "-" are replaced with "_" and used as keys to get the right document
     var key = machName[ (doc.data().name.replace(" ", "_")).replace("-", "_") ];
@@ -402,7 +403,6 @@ function CreateMachineHTML(doc){
       var stolp2
       var stolp3
 
-      table.innerHTML = null;
       var data = [];
       for(y in doc.data()) {
           data.push(y);
