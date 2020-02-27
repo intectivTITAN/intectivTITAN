@@ -417,8 +417,9 @@ function CreateMachineHTML(doc){
       for(i in data) {
         if(i == 9) break;
           x = data[i];
+          y = doc.data()[x];
           if(key == "MDI") {
-            
+            y = ((parseInt(y)/2).toString()).split(".")[0];
           }
           console.log(x);
 
@@ -428,7 +429,7 @@ function CreateMachineHTML(doc){
         stolp2 = document.createElement("th");
         stolp2.innerText = x.substr(11);
         stolp3 = document.createElement("th");
-        stolp3.innerText = doc.data()[x];
+        stolp3.innerText = y;
 
         vrstica.appendChild(stolp1);
         vrstica.appendChild(stolp2);
