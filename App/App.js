@@ -417,7 +417,9 @@ function CreateMachineHTML(doc){
       for(i in data) {
         if(i == 9) break;
           x = data[i];
-          if(key == "MDI") x /= 2;
+          if(key == "MDI") {
+            
+          }
           console.log(x);
 
         vrstica = document.createElement("tr");
