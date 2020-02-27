@@ -395,7 +395,11 @@ function CreateMachineHTML(doc){
     table.innerHTML = null;
 
     //all " " and "-" are replaced with "_" and used as keys to get the right document
-    var key = machName[ (doc.data().name.replace(" ", "_")).replace("-", "_") ];
+    var key = (doc.data().name.replace(" ", "_")).replace("-", "_");
+    if(key.startsWith("A")) {
+      key = key.toLocaleLowerCase();
+    }
+    console.log(key);
     var DF = db.collection('DFpS').doc(key).get().then(function (doc) {
       //prepare variable names
       var vrstica
@@ -413,6 +417,7 @@ function CreateMachineHTML(doc){
       for(i in data) {
         if(i == 9) break;
           x = data[i];
+          if(key == "MDI") x /= 2;
           console.log(x);
 
         vrstica = document.createElement("tr");
