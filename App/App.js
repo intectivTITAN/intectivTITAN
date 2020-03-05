@@ -428,7 +428,7 @@ function CreateMachineHTML(doc){
 
         vrstica = document.createElement("tr");
         stolp1 = document.createElement("th");
-        stolp1.innerText = (parseInt(d.getDay())+1) + "-" + (parseInt(d.getMonth())+1)  + "-" + d.getFullYear();
+        stolp1.innerText = (d.getDate() + "-" + (parseInt(d.getMonth())+1)  + "-" + d.getFullYear());
         stolp2 = document.createElement("th");
         stolp2.innerText = x.split("-")[1];
         stolp3 = document.createElement("th");
