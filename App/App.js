@@ -413,6 +413,7 @@ function CreateMachineHTML(doc){
       }
       data.reverse();
 
+      var d;
       var x;
       for(i in data) {
         if(i == 9) break;
@@ -423,11 +424,13 @@ function CreateMachineHTML(doc){
           }
           console.log(x);
 
+        d = new Date( parseInt(x.split("-")[0])*1000 );
+
         vrstica = document.createElement("tr");
         stolp1 = document.createElement("th");
-        stolp1.innerText = x.substr(0, 10);
+        stolp1.innerText = (parseInt(d.getDay())+1) + "-" + (parseInt(d.getMonth())+1)  + "-" + d.getFullYear();
         stolp2 = document.createElement("th");
-        stolp2.innerText = x.substr(11);
+        stolp2.innerText = x.split("-")[1];
         stolp3 = document.createElement("th");
         stolp3.innerText = y;
 
