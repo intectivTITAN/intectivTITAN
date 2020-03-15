@@ -385,12 +385,12 @@ function CreateMachineHTML(doc){
   pageContent.appendChild(container);
 
   //get the table
-  container.setAttribute("data-toggle", "modal")
-  container.setAttribute("data-target", "#exampleModalCenter")
-  container.setAttribute("type", "button")
+  center.setAttribute("data-toggle", "modal")
+  center.setAttribute("data-target", "#exampleModalCenter")
+  center.setAttribute("type", "button")
 
   //modify the table when opened
-  container.onclick = function () {
+  center.onclick = function () {
     table = document.getElementById("table-body");
     table.innerHTML = null;
 
