@@ -338,7 +338,12 @@ function CreateMachineHTML(doc){
   let breakPoint3 = document.createElement('br');
   let machineStuff = document.createElement('span');
 
-  pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
+  if(doc.data().data.toString().split("|")[1].split("+").length == 2) {
+    pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1].split("+")[1].substr(1);
+  } else {
+    pdnText.textContent = "PDN: " + doc.data().data.toString().split("|")[1];
+  }
+
   errorText.textContent = "Error: " + doc.data().data.toString().split("|")[4];
 
   if(doc.data().name == "MDI"){
